@@ -1,0 +1,15 @@
+name: Supabase Waker Service
+
+on:
+  schedule:
+    - cron: '0 0 * * 0,3'
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make a request to the Supabase API
+        run: |
+          curl -X GET "${{ secrets.SUPABASE_URL }}" \
+          -H "Apikey: ${{ secrets.SUPABASE_API_KEY }}"
