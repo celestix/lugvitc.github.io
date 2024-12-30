@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Make a request to the Supabase API
         run: |
-          curl -X GET "${{ secrets.SUPABASE_URL }}" \
-          -H "Apikey: ${{ secrets.SUPABASE_API_KEY }}"
+          curl -X GET "${{ vars.SUPABASE_URL }}" \
+          -H "Apikey: ${{ vars.SUPABASE_API_KEY }}"
