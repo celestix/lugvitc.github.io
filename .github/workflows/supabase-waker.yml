@@ -13,3 +13,18 @@ jobs:
         run: |
           curl -X GET "${{ vars.SUPABASE_URL }}" \
           -H "Apikey: ${{ vars.SUPABASE_API_KEY }}"
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+      - name: Update .wake_service
+        run: |
+          echo "Last wake-up: $(date)" > .wake_service
+      - name: Commit the changes
+        run: |
+          git config --global user.email ${{ vars.GH_EMAIL }}
+          git config --global user.name ${{ vars.GH_USERNAME }}
+          git add .wake_service
+          git commit -m "Wake up the Supabase service"
+      - name: Push the changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_PAT }}
